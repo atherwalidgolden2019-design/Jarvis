@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: jarvis
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn server:app --workers 1 --threads 4 --timeout 120 --bind 0.0.0.0:$PORT
+    envVars:
+      - key: JARVIS_MODE
+        value: cloud
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: JARVIS_ACCESS_CODE
+        sync: false
+      - key: JARVIS_USER_NAME
+        value: sir
